@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Escolha Segura - Compare e encontre sua seguradora ideal</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9fb;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0062ff, #00c3ff);
+      color: #fff;
+    }
+
+    nav ul li a {
+      color: #fff !important;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 0;
+      background: linear-gradient(135deg, #0062ff, #00c3ff);
+      border-radius: 20px;
+      color: white;
+      margin-bottom: 60px;
+    }
+
+    .hero img {
+      max-width: 500px;
+      border-radius: 20px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 20px;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .card:hover,
+    .card:focus-within {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      height: 180px;
+      object-fit: contain;
+      background: #f4f7ff;
+      padding: 10px;
+    }
+
+    .benefits {
+      background: #e9f3ff;
+      border-radius: 20px;
+      padding: 50px;
+    }
+
+    footer {
+      background-color: #003366;
+      color: white;
+    }
+
+    footer i {
+      font-size: 1.5rem;
+      margin: 0 8px;
+    }
+
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #00c3ff;
+      outline-offset: 2px;
+    }
+
+    /* Painel de acessibilidade */
+    #accessibility-panel {
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 15px;
+      z-index: 9999;
+      width: 220px;
+      display: none;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #accessibility-panel button,
+    #accessibility-panel a {
+      margin: 3px 0;
+      width: 100%;
+    }
+
+    #accessibility-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      background: #ffdd00;
+      border: none;
+      padding: 15px 18px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    #accessibility-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .high-contrast {
+      background-color: #000 !important;
+      color: #fff !important;
+    }
+
+    .high-contrast .card {
+      background-color: #111 !important;
+      color: #fff !important;
+    }
+
+    .high-contrast .hero {
+      background: #000 !important;
+      color: #fff !important;
+    }
+
+    .high-contrast footer {
+      background-color: #000 !important;
+      color: #fff !important;
+    }
+
+    .increased-spacing * {
+      letter-spacing: 0.12em !important;
+      line-height: 1.7 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Botão para abrir/fechar painel de acessibilidade -->
+  <button id="accessibility-toggle" aria-label="Abrir painel de acessibilidade">♿</button>
+
+  <!-- Painel de acessibilidade -->
+  <div id="accessibility-panel" aria-label="Painel de acessibilidade">
+    <button onclick="toggleContrast()" aria-label="Ativar alto contraste">Alto Contraste</button>
+    <button onclick="increaseFont()" aria-label="Aumentar tamanho da fonte">A+</button>
+    <button onclick="decreaseFont()" aria-label="Diminuir tamanho da fonte">A-</button>
+    <button onclick="toggleSpacing()" aria-label="Aumentar espaçamento de texto">Espaçamento</button>
+    <button onclick="speakContent()" aria-label="Ler conteúdo em voz alta">🔊 Ler Página</button>
+    <a href="#main-content" class="btn btn-link" aria-label="Pular para conteúdo principal">Pular para conteúdo</a>
+    <button onclick="closePanel()" aria-label="Fechar painel de acessibilidade">Fechar</button>
+  </div>
+
+  <header class="p-4">
+    <nav class="container d-flex justify-content-between align-items-center" aria-label="Navegação principal">
+      <h2 class="fw-bold">Escolha<span style="color:#ffdd00;">Segura</span></h2>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#seguradoras">Seguradoras</a></li>
+        <li class="nav-item"><a class="nav-link" href="#beneficios">Benefícios</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="main-content" tabindex="-1">
+
+    <section id="inicio" class="hero mt-5 p-5">
+      <div class="col-md-6">
+        <h1 class="fw-bold display-5 mb-4">Encontre a seguradora ideal para o seu perfil</h1>
+        <p class="fs-5 mb-4">Compare as melhores seguradoras do Brasil e descubra qual oferece o melhor custo-benefício para você. Aqui, explicamos tudo de forma simples e direta.</p>
+        <a href="#seguradoras" class="btn btn-warning fw-semibold rounded-pill px-4 py-2">Explorar agora</a>
+      </div>
+      <img src="img/seguros-banner.png" alt="Pessoa escolhendo uma seguradora em um site" loading="lazy">
+    </section>
+
+    <section id="seguradoras" class="my-5">
+      <h2 class="text-center fw-bold mb-4">Conheça as principais seguradoras</h2>
+      <p class="text-center mb-5">Entenda o que cada seguradora oferece e escolha com segurança e confiança.</p>
+
+      <div class="row g-4">
+        <!-- Allianz -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/allianz.png" alt="Logo da Allianz Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Allianz</h5>
+              <p>Uma das maiores do mundo, a Allianz é sinônimo de solidez e confiança, com ampla cobertura e ótimos serviços.</p>
+              <ul>
+                <li>Planos personalizados</li>
+                <li>Rede global de atendimento</li>
+                <li>Alta confiabilidade</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Azul -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/azul.png" alt="Logo da Azul Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-info">Azul Seguros</h5>
+              <p>Parte do grupo Porto, a Azul Seguros oferece planos acessíveis e ideais para quem busca proteção sem gastar muito.</p>
+              <ul>
+                <li>Excelente custo-benefício</li>
+                <li>Assistência 24h</li>
+                <li>Suporte rápido e eficiente</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bradesco -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/bradesco.png" alt="Logo da Bradesco Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-danger">Bradesco Seguros</h5>
+              <p>Parte de um dos maiores bancos do Brasil, oferece segurança e facilidade para quem já é cliente Bradesco.</p>
+              <ul>
+                <li>Descontos para correntistas</li>
+                <li>Rede de atendimento nacional</li>
+                <li>Várias modalidades de seguro</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ezze -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/ezze.png" alt="Logo da Ezze Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-success">Ezze Seguros</h5>
+              <p>Seguradora moderna e digital, com foco em atendimento descomplicado e cobertura sob medida.</p>
+              <ul>
+                <li>Atendimento rápido pelo WhatsApp</li>
+                <li>Contratação simples</li>
+                <li>Planos acessíveis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- HDI -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/hdi.png" alt="Logo da HDI Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-info">HDI Seguros</h5>
+              <p>Seguradora tradicional com excelente reputação em seguros de automóvel e residência.</p>
+              <ul>
+                <li>Assistência 24h eficiente</li>
+                <li>Boa reputação no atendimento</li>
+                <li>Descontos por fidelidade</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loovi -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/loovi.png" alt="Logo da Loovi Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-warning">Loovi</h5>
+              <p>Seguradora 100% digital, com contratação rápida e sem burocracia. Ideal para quem busca praticidade total.</p>
+              <ul>
+                <li>Contratação online</li>
+                <li>Gestão completa via app</li>
+                <li>Planos mensais flexíveis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mapfre -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/mapfre.png" alt="Logo da Mapfre Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-danger">Mapfre</h5>
+              <p>Multinacional com presença forte no Brasil, oferecendo planos completos e ótimo suporte ao cliente.</p>
+              <ul>
+                <li>Grande rede de parceiros</li>
+                <li>Atendimento ágil</li>
+                <li>Variedade de coberturas</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mitsui -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/mitsui.png" alt="Logo da Mitsui Sumitomo Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Mitsui Sumitomo</h5>
+              <p>Com origem japonesa, a Mitsui oferece confiança, tradição e soluções completas em seguros automotivos e empresariais.</p>
+              <ul>
+                <li>Atendimento personalizado</li>
+                <li>Segurança e tradição</li>
+                <li>Planos completos e flexíveis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Porto -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/porto.png" alt="Logo da Porto Seguro">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Porto Seguro</h5>
+              <p>Uma das mais reconhecidas do país, a Porto oferece ampla rede de assistência, descontos no cartão Porto e serviços residenciais 24h.</p>
+              <ul>
+                <li>Atendimento rápido e humanizado</li>
+                <li>Aplicativo completo</li>
+                <li>Serviços extras inclusos</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suhai -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/suhai.png" alt="Logo da Suhai Seguradora">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-danger">Suhai Seguradora</h5>
+              <p>Especialista em seguros sem perfil, a Suhai aceita veículos de todas as idades e perfis, com foco em furto e roubo.</p>
+              <ul>
+                <li>Sem análise de perfil</li>
+                <li>Seguro rápido e acessível</li>
+                <li>Aceita veículos antigos e modificados</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokio -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/tokio.png" alt="Logo da Tokio Marine Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-success">Tokio Marine</h5>
+              <p>Seguradora japonesa com mais de 100 anos, conhecida pela confiança e bons preços. Ideal para quem busca segurança e economia.</p>
+              <ul>
+                <li>Ótimo custo-benefício</li>
+                <li>Excelente suporte técnico</li>
+                <li>Planos flexíveis</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yelum -->
+        <div class="col-md-4">
+          <div class="card h-100" tabindex="0">
+            <img src="img/yelum.png" alt="Logo da Yelum Seguros">
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-warning">Yelum Seguros</h5>
+              <p>Focada em inovação, a Yelum oferece seguros com cobertura personalizada e atendimento digital 24h.</p>
+              <ul>
+                <li>Atendimento 100% online</li>
+                <li>Coberturas sob medida</li>
+                <li>Ideal para quem valoriza tecnologia</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" class="benefits my-5 text-center">
+      <h2 class="fw-bold mb-4">Por que comparar seguradoras?</h2>
+      <p class="mb-5 fs-5">Comparar te ajuda a encontrar o melhor custo-benefício e o plano que realmente faz sentido para o seu estilo de vida.</p>
+      <div class="row">
+        <div class="col-md-4">
+          <i class="bi bi-cash-coin fs-1 text-primary" aria-hidden="true"></i>
+          <h5 class="mt-3 fw-semibold">Economia</h5>
+          <p>Encontre o plano ideal e evite pagar mais por coberturas que não usa.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="bi bi-shield-check fs-1 text-success" aria-hidden="true"></i>
+          <h5 class="mt-3 fw-semibold">Segurança</h5>
+          <p>Escolha empresas com boas avaliações e suporte confiável.</p>
+        </div>
+        <div class="col-md-4">
+          <i class="bi bi-lightning-charge fs-1 text-warning" aria-hidden="true"></i>
+          <h5 class="mt-3 fw-semibold">Rapidez</h5>
+          <p>Compare online e receba sua simulação personalizada em minutos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="my-5">
+      <div class="container p-5 d-flex justify-content-center">
+        <div class="col-md-8 col-lg-10 rounded-5 bg-white p-4 shadow">
+          <h2 class="mb-3 fw-bold">Quer ajuda para escolher?</h2>
+          <p>Preencha o formulário e receba uma análise personalizada com as melhores opções para o seu perfil.</p>
+          <form aria-label="Formulário de contato para análise personalizada">
+            <div class="form-group mb-3">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" class="form-control rounded-3 mt-1" placeholder="Seu nome completo">
+            </div>
+            <div class="form-group mb-3">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control rounded-3 mt-1" placeholder="Seu e-mail">
+            </div>
+            <div class="form-group mb-3">
+              <label for="tipo">Tipo de seguro</label>
+              <select id="tipo" name="tipo" class="form-control rounded-3 mt-1">
+                <option>Automóvel</option>
+                <option>Residencial</option>
+                <option>Vida</option>
+                <option>Outros</option>
+              </select>
+            </div>
+            <div class="form-group mb-3">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" class="form-control rounded-4 mt-2" rows="4" placeholder="Conte um pouco sobre o que procura"></textarea>
+            </div>
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-primary btn-lg rounded-pill">Receber minha análise</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="p-4 text-center">
+    <p>© 2025 Escolha Segura - Todos os direitos reservados</p>
+    <div>
+      <i class="bi bi-facebook" aria-hidden="true"></i>
+      <i class="bi bi-instagram" aria-hidden="true"></i>
+      <i class="bi bi-linkedin" aria-hidden="true"></i>
+    </div>
+  </footer>
+
+  <script>
+    const accessibilityToggle = document.getElementById('accessibility-toggle');
+    const accessibilityPanel = document.getElementById('accessibility-panel');
+
+    accessibilityToggle.addEventListener('click', () => {
+      accessibilityPanel.style.display = accessibilityPanel.style.display === 'block' ? 'none' : 'block';
+    });
+
+    function closePanel() {
+      accessibilityPanel.style.display = 'none';
+    }
+
+    function toggleContrast() {
+      document.body.classList.toggle('high-contrast');
+    }
+
+    function increaseFont() {
+      const main = document.getElementById('main-content');
+      const style = window.getComputedStyle(main, null).getPropertyValue('font-size');
+      const currentSize = parseFloat(style);
+      main.style.fontSize = (currentSize + 2) + 'px';
+    }
+
+    function decreaseFont() {
+      const main = document.getElementById('main-content');
+      const style = window.getComputedStyle(main, null).getPropertyValue('font-size');
+      const currentSize = parseFloat(style);
+      main.style.fontSize = (currentSize - 2) + 'px';
+    }
+
+    function toggleSpacing() {
+      document.getElementById('main-content').classList.toggle('increased-spacing');
+    }
+
+    function speakContent() {
+      const mainContent = document.getElementById('main-content').innerText;
+      const utterance = new SpeechSynthesisUtterance(mainContent);
+      speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+
+</html>
+
